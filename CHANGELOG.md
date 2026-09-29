@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## v6.51.3 (2026-09-25)
+
+### Fix
+
+* fix: fix attn only hooked sae transformer (#741) ([`1de2390`](https://github.com/decoderesearch/SAELens/commit/1de2390cafcb2061532047b96810bb8044181121))
+
+## v6.51.2 (2026-09-24)
+
+### Fix
+
+* fix: pin transformer-lens to &lt;4.0.0
+
+transformer-lens 4.0 introduces breaking changes that are incompatible
+with SAELens.
+
+Co-Authored-By: Claude Fable 5.1 &lt;noreply@anthropic.com&gt; ([`3d35942`](https://github.com/decoderesearch/SAELens/commit/3d35942e9009b2cfcd2caa7d111070f31b0679b5))
+
 ## v6.51.1 (2026-09-18)
 
 ### Fix

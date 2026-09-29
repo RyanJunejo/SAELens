@@ -16,7 +16,7 @@ if not has_hooked_transformer():
         "HookedTransformer was removed in transformer-lens 4.0", allow_module_level=True
     )
 
-from transformer_lens import HookedTransformer
+from transformer_lens import HookedTransformer, HookedTransformerConfig
 from transformer_lens.HookedTransformer import Loss
 
 from sae_lens.analysis.hooked_sae_transformer import (
@@ -799,6 +799,15 @@ def test_HookedSAETransformer_adds_hook_in_to_mlp():
     for n in range(model.cfg.n_layers):
         assert f"blocks.{n}.mlp.hook_in" in cache
         assert cache[f"blocks.{n}.mlp.hook_in"].shape == (1, 4, 768)
+
+
+def test_HookedSAETransformer_works_with_attn_only_models():
+    cfg = HookedTransformerConfig(
+        n_layers=1, d_model=2, n_ctx=2, d_head=1, d_vocab=3, attn_only=True
+    )
+    model = HookedSAETransformer(cfg)
+    _, cache = model.run_with_cache(torch.tensor([[0, 1]]))
+    assert not any(name.endswith("mlp.hook_in") for name in cache)
 
 
 # ============================================================================
